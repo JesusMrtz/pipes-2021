@@ -1,0 +1,56 @@
+<div class="text-white">
+  <h1>Pipes personalizados</h1>
+  <p>
+    Pipes creado por {{ 'nosotros' | mayusculas:isMayus }}
+  </p>
+</div>
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+  </div>
+
+  <div class="p-toolbar-group-right">
+    <button class="p-mr-1 p-button-help" pButton (click)="isMayus = !isMayus" label="Toggle mayusculas"></button>
+    <button class="p-mr-1 text-white" pButton icon="pi pi-sort" label="Por nombre" (click)="changeOrder('name')"></button>
+    <button class="p-mr-1 text-white p-button-success" pButton icon="pi pi-sort" label="Vuela" (click)="changeOrder('flying')"></button>
+    <button class="p-mr-1 text-white p-button-danger" pButton icon="pi pi-sort" label="Por color" (click)="changeOrder('color')"></button>
+  </div>
+</p-toolbar>
+
+<div class="p-grid">
+  <div class="p-col p-mt-2">
+    <p-table [value]="heroes | ordernar:orderBy">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Nombre</th>
+              <th>Vuela</th>
+              <th>Color</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-heroe>
+          <tr>
+              <td>{{heroe.name}}</td>
+              <td>{{heroe.flying | vuela | titlecase}}</td>
+              <td>{{heroe.color}}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="p-col p-mt-2">
+    <p-table [value]="copyHeroes">
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="name">Nombre <p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="flying">Vuela <p-sortIcon field="code"></p-sortIcon></th>
+              <th pSortableColumn="color">Color <p-sortIcon field="code"></p-sortIcon></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-heroe>
+          <tr>
+              <td>{{heroe.name}}</td>
+              <td>{{heroe.flying | vuela | titlecase}}</td>
+              <td>{{heroe.color}}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
